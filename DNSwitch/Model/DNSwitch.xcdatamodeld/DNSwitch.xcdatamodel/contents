@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D70" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DNSRule" representedClassName="DNSRule" syncable="YES" codeGenerationType="class">
+        <attribute name="enabled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="10" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ssidMatch" optional="YES" attributeType="String"/>
+        <relationship name="server" maxCount="1" deletionRule="Cascade" destinationEntity="DNSServer" inverseName="rules" inverseEntity="DNSServer"/>
+    </entity>
+    <entity name="DNSServer" representedClassName="DNSServer" syncable="YES" codeGenerationType="class">
+        <attribute name="ipv4" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray"/>
+        <attribute name="ipv6" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="port" optional="YES" attributeType="Integer 16" defaultValueString="53" usesScalarValueType="YES"/>
+        <attribute name="protocolType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serverURL" optional="YES" attributeType="URI"/>
+        <relationship name="rules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DNSRule" inverseName="server" inverseEntity="DNSRule"/>
+        <relationship name="serverFallbacks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServerFallback" inverseName="primary" inverseEntity="ServerFallback"/>
+        <relationship name="usedAsFallbackFor" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServerFallback" inverseName="fallback" inverseEntity="ServerFallback"/>
+    </entity>
+    <entity name="ServerFallback" representedClassName="ServerFallback" syncable="YES" codeGenerationType="class">
+        <attribute name="order" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="fallback" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DNSServer" inverseName="usedAsFallbackFor" inverseEntity="DNSServer"/>
+        <relationship name="primary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DNSServer" inverseName="serverFallbacks" inverseEntity="DNSServer"/>
+    </entity>
+</model>

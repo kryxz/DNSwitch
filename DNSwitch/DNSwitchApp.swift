@@ -13,7 +13,7 @@ struct DNSwitchApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DNSServersListView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

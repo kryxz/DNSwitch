@@ -25,6 +25,13 @@ It also solves the common issue with captive portals (login screens on public Wi
 
 This project is just starting—currently setting up the repository and planning next steps.
 
+
+### Screenshots
+
+#### Main Screen
+
+![Main screen view showing a list of DNS servers](https://i.imgur.com/JxNkuCK.png)
+
 ## Technical Implementation
 
 The app will utilize:
@@ -35,7 +42,7 @@ The app will utilize:
 
 ## Roadmap
 
-- [ ] Repository setup and initial project structure
+- [x] Repository setup and initial project structure
 - [ ] Basic UI design and implementation
 - [ ] DNS profile creation and management
 - [ ] Network detection and automatic profile switching
