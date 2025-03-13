@@ -14,9 +14,13 @@ struct DNSServersListView: View {
 
     @FetchRequest(
         entity: DNSServer.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \DNSServer.name, ascending: true)],
+        sortDescriptors: [
+            // Sort by isDefault descending so that the default server appears at the top,
+            // then by name ascending.
+            NSSortDescriptor(keyPath: \DNSServer.isDefault, ascending: false),
+            NSSortDescriptor(keyPath: \DNSServer.name, ascending: true)
+        ],
         animation: .default)
-    
     private var servers: FetchedResults<DNSServer>
 
     var body: some View {
@@ -25,8 +29,7 @@ struct DNSServersListView: View {
                 Section(header: Text("Servers").font(.headline).padding(.vertical, 4)) {
                     ForEach(servers) { server in
                         NavigationLink {
-                            Text("Detail view for \(server.name ?? "Unnamed Server")")
-                                .navigationTitle(server.name ?? "Server Details")
+                            DNSServerDetailView(server: server)
                         } label: {
                             DNSServerView(server: server)
                         }
