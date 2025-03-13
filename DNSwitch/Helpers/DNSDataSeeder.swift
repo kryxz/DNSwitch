@@ -35,7 +35,6 @@ func createSampleDNSServers(in context: NSManagedObjectContext) {
         name: "AdGuard",
         ipv4: ["94.140.14.14", "94.140.15.15"],
         ipv6: ["2a10:50c0::ad1:ff", "2a10:50c0::ad2:ff"],
-        // Using a custom URL scheme for DoT. Adjust or set to nil if not needed.
         serverURL: URL(string: "tls://dns.adguard.com"),
         port: 853,
         protocolType: .dot
@@ -47,7 +46,6 @@ func createSampleDNSServers(in context: NSManagedObjectContext) {
         name: "AdGuard",
         ipv4: ["94.140.14.14", "94.140.15.15"],
         ipv6: ["2a10:50c0::ad1:ff", "2a10:50c0::ad2:ff"],
-        // Using a custom URL scheme for DoT. Adjust or set to nil if not needed.
         serverURL: URL(string: "https://dns.adguard-dns.com/dns-query"),
         port: 443,
         protocolType: .doh
