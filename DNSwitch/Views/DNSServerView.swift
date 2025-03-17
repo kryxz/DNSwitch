@@ -9,12 +9,18 @@
 import SwiftUI
 
 struct DNSServerView: View {
-    var server: DNSServer
+    @ObservedObject var server: DNSServer
 
     var body: some View {
         HStack {
+            if server.isDefault {
+                Circle()
+                    .fill(Color.green)
+                    .frame(width: 10, height: 10)
+                    .padding(.trailing, 8)
+            }
             VStack(alignment: .leading, spacing: 2) {
-                Text(server.name ?? "Unnamed Server")
+                Text(server.name!)
                     .font(.headline)
                 Text(server.protocolTypeDescription)
                     .font(.subheadline)
